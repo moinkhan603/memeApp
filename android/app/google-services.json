@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "742513358694",
+    "firebase_url": "https://memepalace-e8b04.firebaseio.com",
+    "project_id": "memepalace-e8b04",
+    "storage_bucket": "memepalace-e8b04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742513358694:android:80338d37c9d943cb8c3aa7",
+        "android_client_info": {
+          "package_name": "com.example.memes_palace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742513358694-aqsvaln59rarh4mu09ks9g8huit59f88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdTmfCS_h9WFtZ924v1qXaH1iK_7PkTTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742513358694-aqsvaln59rarh4mu09ks9g8huit59f88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
