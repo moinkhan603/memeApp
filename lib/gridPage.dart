@@ -27,39 +27,41 @@ class _gridPageState extends State<gridPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.black45,
       body: _children[_currentIndex],
 
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar:   BottomNavigationBar(
+backgroundColor: Colors.black45,
+type: BottomNavigationBarType.fixed,
+          onTap: onTabTapped, // new
+          currentIndex: _currentIndex, // this will be set when a new tab is tapped
+          items: [
 
-        onTap: onTabTapped, // new
-        currentIndex: _currentIndex, // this will be set when a new tab is tapped
-        items: [
-
-          BottomNavigationBarItem(
-              icon: new FaIcon(FontAwesomeIcons.rocket,color: Colors.black87,),
-              activeIcon: FaIcon(FontAwesomeIcons.rocket,color: Colors.black87,) ,
-              title: Text('Recent',style: TextStyle(color: Colors.black))
-          ),
-          BottomNavigationBarItem(
-            icon: new FaIcon(FontAwesomeIcons.poll,color: Colors.black87,),
-            activeIcon: new FaIcon(FontAwesomeIcons.poll,color: Colors.black87,),
-            title: new Text('Trending',style: TextStyle(color: Colors.black)),
-          ),
-          BottomNavigationBarItem(
-            icon: new FaIcon(FontAwesomeIcons.random,color: Colors.black87,),
-            activeIcon: new FaIcon(FontAwesomeIcons.random,color: Colors.black87,),
-            title: Text('Random',style: TextStyle(color: Colors.black)),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.favorite,color: Colors.black87,),
-            activeIcon: new Icon(Icons.favorite,color: Colors.black87,),
-            title: Text('Favourites',style: TextStyle(color: Colors.black)),
-          ),
+            BottomNavigationBarItem(
+                icon: new FaIcon(FontAwesomeIcons.rocket,color: Color(0xffF5BD1F),),
+                activeIcon: FaIcon(FontAwesomeIcons.rocket,color: Color(0xffF5BD1F),) ,
+                title: Text('Recent',style: TextStyle(color: Color(0xffF5BD1F)))
+            ),
+            BottomNavigationBarItem(
+              icon: new FaIcon(FontAwesomeIcons.poll,color: Color(0xffF5BD1F),),
+              activeIcon: new FaIcon(FontAwesomeIcons.poll,color: Color(0xffF5BD1F),),
+              title: new Text('Trending',style: TextStyle(color: Color(0xffF5BD1F))),
+            ),
+            BottomNavigationBarItem(
+              icon: new FaIcon(FontAwesomeIcons.random,color: Color(0xffF5BD1F),),
+              activeIcon: new FaIcon(FontAwesomeIcons.random,color: Color(0xffF5BD1F),),
+              title: Text('Random',style: TextStyle(color: Color(0xffF5BD1F))),
+            ),
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.favorite,color: Color(0xffF5BD1F),),
+              activeIcon: new Icon(Icons.favorite,color: Color(0xffF5BD1F),),
+              title: Text('Favourites',style: TextStyle(color: Color(0xffF5BD1F))),
+            ),
 
 
-        ],
-      ),
+          ],
+        ),
+      
     );
   }
 
