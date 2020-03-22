@@ -28,8 +28,10 @@ class _UploadScreenState extends State<UploadScreen> {
           children: <Widget>[
             Text('Selected Image'),
             _image != null
+
                 ? Image.asset(
-              _image.path,
+
+              _image.path.toString(),
               height: 150,
             )
                 : Container(height: 150),
@@ -67,10 +69,11 @@ class _UploadScreenState extends State<UploadScreen> {
      );
   }
 
-  Future chooseFile() async {
-    await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {
+  Future chooseFile() {
+     ImagePicker.pickImage(source: ImageSource.gallery).then((image) {
       setState(() {
         _image = image;
+        print(_image);
       });
     });
   }
