@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:memes_palace/FullScreens.dart';
 import 'UploadScreen.dart';
 import'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'dart:async';
 import 'fullScreen.dart';
+
+
 class Random extends StatefulWidget {
   @override
   _RandomState createState() => _RandomState();
@@ -58,7 +61,9 @@ class _RandomState extends State<Random> {
           itemCount: images.length,
           itemBuilder: (context, i) {
             String imgPath = images[i].data['imgUrl'];
-
+            int likes=images[i].data['likes'];
+           String id=  images[i].documentID.toString();
+            print(id);
             return new Material(
               elevation: 15.0,
               borderRadius: new BorderRadius.all(new
@@ -66,7 +71,7 @@ class _RandomState extends State<Random> {
               child: new InkWell(
                 onTap: () =>
                     Navigator.push(context, new MaterialPageRoute(
-                      builder: (context) => FullScreenImagePage(imgPath),
+                      builder: (context) => FullScreen(imgPath,likes,id,"Random"),
                     )),
                 child: new Hero(tag: imgPath, child: new
                 FadeInImage(placeholder:

@@ -3,13 +3,61 @@ import 'UploadScreen.dart';
 import'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'dart:async';
-import 'fullScreen.dart';
+import 'package:memes_palace/FullScreens.dart';
+import 'package:firebase_admob/firebase_admob.dart';
+
 class Trending extends StatefulWidget {
   @override
   _TrendingState createState() => _TrendingState();
 }
 
-class _TrendingState extends State<Trending> {StreamSubscription<QuerySnapshot>subscription;
+class _TrendingState extends State<Trending> {
+
+
+  static final MobileAdTargetingInfo targetingInfo = new MobileAdTargetingInfo(
+
+
+      testDevices: <String>[],
+      keywords: <String>['recent', 'trend', 'random'],
+      birthday: DateTime.now(),
+      childDirected: true
+  );
+
+  BannerAd _bannerAd;
+  InterstitialAd _interstitialAd;
+
+  BannerAd createBannerAd() {
+    return new BannerAd(
+        adUnitId: BannerAd.testAdUnitId,
+        size: AdSize.banner,
+
+        targetingInfo: targetingInfo,
+        listener: (MobileAdEvent event) {
+          print("BANNER EVENT:  $event");
+        }
+
+    );
+  }
+
+  InterstitialAd createInterstitialAd() {
+    return new InterstitialAd(
+        adUnitId: "ca-app-pub-6960977053080857/4552318797",
+        targetingInfo: targetingInfo,
+        listener: (MobileAdEvent event) {
+          print("Interstitial EVENT:  $event");
+        }
+
+    );
+  }
+
+
+
+
+
+
+
+
+  StreamSubscription<QuerySnapshot>subscription;
 List<DocumentSnapshot>images;
 final CollectionReference collectionReference =
 Firestore.instance.collection("Trending");
@@ -18,7 +66,9 @@ Firestore.instance.collection("Trending");
 void initState() {
   // TODO: implement initState
   super.initState();
-
+  FirebaseAdMob.instance.initialize(
+      appId: "ca-app-pub-6960977053080857~6214445320"
+  );
   subscription = collectionReference.snapshots()
       .listen((datasnapshot) {
     setState(() {
@@ -30,7 +80,7 @@ void initState() {
 @override
 void dispose() {
   // TODO: implement dispose
-
+  _interstitialAd?.dispose();
   subscription?.cancel();
   super.dispose();
 }
@@ -38,6 +88,7 @@ void dispose() {
 @override
 Widget build(BuildContext context) {
   return Scaffold(
+    backgroundColor: Colors.black,
       appBar: AppBar(title: Text("Trending MEMES"), centerTitle: true,
         backgroundColor: Colors.black87,
 //          actions: <Widget>[
@@ -57,23 +108,38 @@ Widget build(BuildContext context) {
         itemCount: images.length,
         itemBuilder: (context, i) {
           String imgPath = images[i].data['imgUrl'];
-
+          int likes=images[i].data['likes'];
+          String id=  images[i].documentID.toString();
           return new Material(
             elevation: 15.0,
             borderRadius: new BorderRadius.all(new
             Radius.circular(15)),
-            child: new InkWell(
-              onTap: () =>
-                  Navigator.push(context, new MaterialPageRoute(
-                    builder: (context) => FullScreenImagePage(imgPath),
-                  )),
-              child: new Hero(tag: imgPath, child: new
-              FadeInImage(placeholder:
-              new AssetImage('assets/images/logo.png')
-                , image: new
-                NetworkImage(imgPath),
-                fit: BoxFit.cover,
-              )
+            child: Card(
+              elevation: 12,
+              shape: RoundedRectangleBorder(
+
+                borderRadius: BorderRadius.all(
+
+                    Radius.circular(0)),
+
+              ),
+
+
+              child: new InkWell(
+                onTap: (){
+                  createInterstitialAd()..load()..show();
+                    Navigator.push(context, new MaterialPageRoute(
+                      builder: (context) => FullScreen(imgPath,likes,id,"Trending"),
+                    ));},
+
+                child: new Hero(tag: imgPath, child: new
+                FadeInImage(placeholder:
+                new AssetImage('assets/images/logo.png')
+                  , image: new
+                  NetworkImage(imgPath),
+                  fit: BoxFit.cover,
+                )
+                ),
               ),
             ),
 
@@ -82,8 +148,8 @@ Widget build(BuildContext context) {
 
         staggeredTileBuilder: (i) =>
         new StaggeredTile.count(2, i.isEven ? 2 : 3),
-        mainAxisSpacing: 5.0,
-        crossAxisSpacing: 3.0,
+        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 5.0,
       ) : new Center(
         child: new CircularProgressIndicator(),
 

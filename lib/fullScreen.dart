@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FullScreenImagePage extends StatelessWidget {
@@ -17,6 +18,7 @@ class FullScreenImagePage extends StatelessWidget {
           decoration: new BoxDecoration(gradient: backgroundGradient),
           child: new Stack(
             children: <Widget>[
+
               new Align(
                 alignment: Alignment.center,
                 child: new Hero(
