@@ -1,6 +1,6 @@
 # memes_palace
 
-A new Flutter application.
+A meme app using firebase storage and firestore.
 
 ## Screen Shots
 
